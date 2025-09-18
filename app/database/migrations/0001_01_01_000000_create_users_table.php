@@ -11,12 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 1. Create the organizations table first, as users depend on it.
+        Schema::create('organizations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        // 2. Now create the users table with all columns and the foreign key defined from the start.
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -42,8 +53,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('organizations');
     }
 };

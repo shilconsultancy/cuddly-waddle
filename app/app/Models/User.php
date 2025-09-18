@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'avatar', // Add avatar here
+        'avatar',
+        'organization_id',
     ];
 
     /**
@@ -45,5 +46,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the organization that the user belongs to.
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
     }
 }
