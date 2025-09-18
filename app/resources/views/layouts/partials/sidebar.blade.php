@@ -17,9 +17,13 @@
 
     <!-- User Profile -->
     <div class="p-4 border-b border-macgray-700 flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-full bg-macblue-500 flex items-center justify-center">
-            <i data-feather="user" class="text-white"></i>
-        </div>
+        @if (Auth::user()->avatar)
+            <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="User Avatar">
+        @else
+            <div class="w-10 h-10 rounded-full bg-macblue-500 flex items-center justify-center">
+                <i data-feather="user" class="text-white"></i>
+            </div>
+        @endif
         <div>
             <div class="font-medium">{{ Auth::user()->name }}</div>
              <a href="{{ route('logout') }}"
@@ -156,8 +160,8 @@
 
     <!-- Bottom section -->
     <div class="p-4 border-t border-macgray-700">
-        <a href="{{ route('settings.index') }}" class="flex items-center space-x-3 group {{ request()->routeIs('settings.index') ? 'text-white' : 'text-macgray-400' }} hover:text-white">
-            <div class="w-8 h-8 rounded-full {{ request()->routeIs('settings.index') ? 'bg-macblue-700' : 'bg-macgray-700' }} group-hover:bg-macgray-600 flex items-center justify-center">
+        <a href="{{ route('settings.index') }}" class="flex items-center space-x-3 group {{ request()->routeIs('settings.index') || request()->routeIs('profile.edit') ? 'text-white' : 'text-macgray-400' }} hover:text-white">
+            <div class="w-8 h-8 rounded-full {{ request()->routeIs('settings.index') || request()->routeIs('profile.edit') ? 'bg-macblue-700' : 'bg-macgray-700' }} group-hover:bg-macgray-600 flex items-center justify-center">
                 <i data-feather="settings" class="w-4 h-4"></i>
             </div>
             <div class="text-sm">Settings</div>
