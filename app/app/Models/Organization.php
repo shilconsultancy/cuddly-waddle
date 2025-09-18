@@ -20,4 +20,12 @@ class Organization extends Model
     {
         return $this->hasMany(Setting::class);
     }
+
+    /**
+     * Get the items for the organization.
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
