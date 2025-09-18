@@ -39,7 +39,7 @@
             <ul class="space-y-1 px-2">
                 <!-- Home -->
                 <li>
-                    <a href="{{ route('dashboard') }}" class="flex items-center px-3 py-2 rounded-md {{ request()->is('dashboard') ? 'bg-macblue-700 text-white' : 'hover:bg-macgray-700' }}">
+                    <a href="{{ route('dashboard') }}" class="flex items-center px-3 py-2 rounded-md {{ request()->routeIs('dashboard') ? 'bg-macblue-700 text-white' : 'hover:bg-macgray-700' }}">
                         <span class="sidebar-icon w-6 h-6 flex items-center justify-center mr-3 transition-transform">
                             <i data-feather="home" class="w-4 h-4"></i>
                         </span>
@@ -156,11 +156,11 @@
 
     <!-- Bottom section -->
     <div class="p-4 border-t border-macgray-700">
-        <a href="#" class="flex items-center space-x-3 group">
-            <div class="w-8 h-8 rounded-full bg-macgray-700 group-hover:bg-macgray-600 flex items-center justify-center">
-                <i data-feather="settings" class="text-macgray-400 w-4 h-4"></i>
+        <a href="{{ route('settings.index') }}" class="flex items-center space-x-3 group {{ request()->routeIs('settings.index') ? 'text-white' : 'text-macgray-400' }} hover:text-white">
+            <div class="w-8 h-8 rounded-full {{ request()->routeIs('settings.index') ? 'bg-macblue-700' : 'bg-macgray-700' }} group-hover:bg-macgray-600 flex items-center justify-center">
+                <i data-feather="settings" class="w-4 h-4"></i>
             </div>
-            <div class="text-sm text-macgray-400 group-hover:text-white">Settings</div>
+            <div class="text-sm">Settings</div>
         </a>
     </div>
 </div>
